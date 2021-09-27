@@ -3,6 +3,7 @@ Exercising Google Cloud NLP API for sentiment analysis
 
 Credentials located at ./google_credentials.json
 Interpreting results: https://tinyurl.com/dh2t57da
+API Documentation: https://tinyurl.com/e5a394w6
 '''
 
 import os
@@ -13,23 +14,12 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
 Sentiment analysis of a string. Scale goes from -1.0 (negative) to 1.0 (positive), with 0 being neutral
 '''
 def sample_analyze_sentiment(text_content):
-    """
-    Analyzing Sentiment in a String
-
-    Args:
-      text_content The text content to analyze
-    """
 
     client = language_v1.LanguageServiceClient()
-
-    # text_content = 'I am so happy and joyful.'
 
     # Available types: PLAIN_TEXT, HTML
     type_ = language_v1.Document.Type.PLAIN_TEXT
 
-    # Optional. If not specified, the language is automatically detected.
-    # For list of supported languages:
-    # https://cloud.google.com/natural-language/docs/languages
     language = "en"
     document = {"content": text_content, "type_": type_, "language": language}
 
@@ -56,8 +46,10 @@ def sample_analyze_sentiment(text_content):
     print(u"Language of the text: {}".format(response.language))
 
 # Positive text sentiment analysis
-sample_analyze_sentiment("I love dogs")
+sample_analyze_sentiment("I love dogs.")
 # Negative text sentiment analysis
 sample_analyze_sentiment("I hate spiders")
 # Neutral text sentiment analysis
 sample_analyze_sentiment("What time are we leaving?")
+# Multi sentence example
+sample_analyze_sentiment("I love dogs. I hate spiders. What time are we leaving?")
