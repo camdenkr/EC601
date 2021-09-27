@@ -16,3 +16,5 @@ Tokens are stored in a .env file. All functions work properly when given specifi
 * Translate user stories to a modular design
 * Who is your user?
 * What are the basic user stories?
+
+**social_media_analyzer.py**
