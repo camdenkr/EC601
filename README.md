@@ -8,4 +8,4 @@
 Tokens are stored in a .env file. All functions work properly when given specific users, queries, start and end times, etc.
 
 ## Phase 1b
-**googleAPI_tests.py** contains the sample sentiment analysis from Google. Authenticates and sends a request to API to analyse the sentiment of a string. String to be provided for this project will be tweets.
+**googleAPI_tests.py** contains the sample sentiment analysis from Google. Authenticates and sends a request to API to analyse the sentiment of a string. String to be provided for this project will be tweets. Main function prints out 3 examples of analysis of strings (a positive, neutral, and a negative example).
