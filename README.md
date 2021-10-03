@@ -18,3 +18,10 @@ Tokens are stored in a .env file. All functions work properly when given specifi
 * What are the basic user stories?
 
 **social_media_analyzer.py**
+
+### MVP and User Stories
+
+The MVP for this project is a basic program that allows a user to give as input the username of a public twitter user and retrieve a sentiment analysis over time for that user as a plot. The users could be therapiss and their patients looking at the patient's own profile. Users could also be anyone interested in looking into public figures and how their snetiment changes over time. 
+
+As a patient or a therapist I want to be able to look back at my twitter feed and see how my mental health changes over time based on my mood.
+As a general twitter user I want to be able to look at public figures' profiles and investigate trends in general mood for the users.
