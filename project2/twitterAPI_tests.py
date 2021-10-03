@@ -3,6 +3,7 @@ Python tests to interact with the Twitter API.
 
 By: Camden Kronhaus
 Credit to: https://tinyurl.com/4s6s3xff
+API Reference: https://developer.twitter.com/en/docs/api-reference-index
 '''
 
 
