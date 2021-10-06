@@ -37,7 +37,7 @@ def get_userID(username):
 Returns a json of a user's Tweets. The user is specified by user_id which can be gathered from a username using
 get_userID(). By default retrieves the [max_number] (default of 10) most recent tweets
 '''
-def get_user_tweets(user_id, start_time=None, end_time=None, max_results=10, next_token=None):
+def get_user_tweets(user_id, start_time=None, end_time=None, max_results=10, pagination_token=None):
     assert (max_results<=100)
 
     url = "https://api.twitter.com/2/users/" + user_id + "/tweets"
@@ -51,7 +51,7 @@ def get_user_tweets(user_id, start_time=None, end_time=None, max_results=10, nex
         'start_time': start_time,
         'end_time': end_time,
         'max_results': max_results,
-        'next_token': next_token
+        'pagination_token': pagination_token
     }
     response = requests.request("GET", url, headers = headers, params = params)
     # print("Endpoint Response Code: " + str(response.status_code))
@@ -63,7 +63,7 @@ def get_user_tweets(user_id, start_time=None, end_time=None, max_results=10, nex
 '''
 Searches through last 7 days worth of tweets with query parameter.
 '''
-def search_tweets(query, start_time=None, end_time=None, max_results=10, next_token=None):
+def search_tweets(query, start_time=None, end_time=None, max_results=10, pagination_token=None):
     assert (max_results<=100)
     if (query == ""):
         return
@@ -80,7 +80,7 @@ def search_tweets(query, start_time=None, end_time=None, max_results=10, next_to
         'start_time': start_time,
         'end_time': end_time,
         'max_results': max_results,
-        'next_token': next_token
+        'pagination_token': pagination_token
     }
     response = requests.request("GET", url, headers = headers, params = params)
     # print("Endpoint Response Code: " + str(response.status_code))
@@ -92,7 +92,7 @@ def search_tweets(query, start_time=None, end_time=None, max_results=10, next_to
 Returns all the tweets liked by a user specified by the userID, which can be gathered from the username using
 get_userID()
 '''
-def get_liked_tweets(user_id, start_time=None, end_time=None, max_results=10, next_token=None):
+def get_liked_tweets(user_id, start_time=None, end_time=None, max_results=10, pagination_token=None):
     assert (max_results<=100)
     if (user_id == ""):
         return
@@ -108,7 +108,7 @@ def get_liked_tweets(user_id, start_time=None, end_time=None, max_results=10, ne
         'start_time': start_time,
         'end_time': end_time,
         'max_results': max_results,
-        'next_token': next_token
+        'pagination_token': pagination_token
     }
     response = requests.request("GET", url, headers = headers, params = params)
     # print("Endpoint Response Code: " + str(response.status_code))
@@ -120,11 +120,11 @@ def get_liked_tweets(user_id, start_time=None, end_time=None, max_results=10, ne
 def main():
     load_dotenv()
     userID = (get_userID("DojaCat"))
-    # response = get_user_tweets(user_id=userID) # Testing with ID of barack obama
+    # response = get_user_tweets(user_id=userID) # Testing with ID of DojaCat
     # print(json.dumps(response, indent=4, sort_keys=True))
     # response = search_tweets(query="HelloWorld") # Testing search with query
     # print(json.dumps(response, indent=4, sort_keys=True))
-    response = get_liked_tweets(user_id=userID) # Testing with ID of barack obama
-    print(json.dumps(response, indent=4, sort_keys=True))
+    # response = get_liked_tweets(user_id=userID) # Testing with ID of DojaCat
+    # print(json.dumps(response, indent=4, sort_keys=True))
 if __name__ == "__main__":
     main()
