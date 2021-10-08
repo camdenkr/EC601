@@ -161,7 +161,8 @@ def get_sentiments(tweets):
 
 '''
 Plots data gathered from tweets.
-Credit to matplotlib documentation for most of the plotting functionality
+Credit to matplotlib documentation for most of the plotting functionality: https://tinyurl.com/3cm4hxmx
+:param df: dataframe of tweet data
 '''
 def plot_data(df):
     # Convert dates to list in datetime format
@@ -195,6 +196,8 @@ def plot_data(df):
     ax.margins(y=0.1)
     plt.show()
 
+    return
+
 
 def main():
 
@@ -212,11 +215,8 @@ def main():
     df = pd.DataFrame({'text': tweets_text, 'date': tweets_date, 'sentiment': sentiments, 'magnitude': magnitudes})
     
     
-    # # Save to csv
+    # Save to csv
     # df.to_csv("./tweets.csv")
-    # header_list = ["text", "date", "sentiment", "magnitude"]
-    # df = pd.read_csv("./tweets.csv", names=header_list)
-    # dates = [datetime.strptime(date, "%Y-%m-%d") for date in df["date"]]
     
     plot_data(df)
 
