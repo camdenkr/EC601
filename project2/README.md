@@ -32,4 +32,4 @@ The final script for running the application is **social_media_analyzer.py**
 The following are examples of the output plots gather 100 tweets worth of data from DojaCat
 ![Figure 1](/images/p2_example_out_1.png)
 
-                                            Figure 2: Example output 1
+                                            Figure 2: Example output (DojaCat, 100 tweets)
