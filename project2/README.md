@@ -28,6 +28,7 @@ The MVP for this project is a program that allows a user to input a twitter prof
 
 
 ## Finalize
+The final script for running the application is **social_media_analyzer.py**
 The following are examples of the output plots gather 100 tweets worth of data from DojaCat
 ![Figure 1](/images/p2_example_out_1.png)
 
