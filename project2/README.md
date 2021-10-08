@@ -20,7 +20,7 @@ Tokens are stored in a .env file. All functions work properly when given specifi
 
 ### MVP and User Stories
 
-The MVP for this project is a program that allows a user to input a twitter profile's username and be able to retrieve that user's sentiment analysis over time as a plot based on their tweets. In this way a user will be able to investigate the sentiment of the profile, or at the very least the sentiment being broadcast by the profile's tweets, and see trends over time. The user may be an average twitter user wanting to investigate public profiles, potentially that of political figures or celebrities. It may also be used by users working with therapists as a tool to look at their own sentiment over time. 
+The MVP for this project is a program that allows a user to input a twitter profile's username and be able to retrieve that user's sentiment analysis over time as a plot based on their tweets. In this way a user will be able to investigate the sentiment of the profile, or at the very least the sentiment being broadcast by the profile's tweets, and see trends over time. The user may be an average twitter user wanting to investigate public profiles, potentially that of political figures or celebrities. It may also be used by users working with therapists as a tool to look at their own sentiment over time. Due to the fact that different people tweet at different time, the exact date range cannot be specified. Rather 100 tweets are simply gathered (although this can be adjusted if necessary) and their dates extracted and plotted wherever they may fall.
 
 ![Figure 1](/images/modular_diagram.png)
                             
