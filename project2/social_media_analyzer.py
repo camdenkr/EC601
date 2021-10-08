@@ -9,6 +9,11 @@ from requests.api import head
 import os
 from google.cloud import language_v1
 
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import numpy as np
+from datetime import datetime
+
 
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
@@ -16,7 +21,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
 
 '''
 Returns the twitter unique user id associated with a username.
-:username: a Twitter username string
+:param: username: a Twitter username string
 '''
 def get_userID(username):
     userID = ""
@@ -66,7 +71,9 @@ def get_user_tweets(user_id, start_time=None, end_time=None, max_results=10, pag
     return response.json()
 
 
-"Takes in a tweet ID and identifies when it was created"
+'''
+Takes in a tweet ID and identifies when it was created
+'''
 def tweet_date_lookup(tweetID):
     
     url = "https://api.twitter.com/2/tweets/" + tweetID
@@ -86,6 +93,7 @@ def tweet_date_lookup(tweetID):
         raise Exception(response.status_code, response.text)
     return response.json()["data"]["created_at"]
 
+
 '''
 Retrieves a total number of tweets and their respective dates as specified
 :param userID: unique Twitter ID for a user
@@ -101,14 +109,19 @@ def get_tweets(userID, n_retrieval):
         token = tweets["meta"]["next_token"]
         for tweet in tweets["data"]:
             tweets_text.append(tweet["text"])
-            tweets_date.append(tweet_date_lookup(tweet["id"]))
+            tweets_date.append(datetime.strptime(tweet_date_lookup(tweet["id"]).split("T")[0], "%Y-%m-%d"))
             if(len(tweets_text)>=n_retrieval):
                 break
     return tweets_text, tweets_date
 
 
 
-
+'''
+Analyzes the sentiment of a single piece of text and returns sentiment score and magnitude of it from Google NLP API
+:param text_content: string, text to analyze sentiment
+:return sentiment: sentiment score
+:return magnitude: magnitude score
+'''
 def analyze_sentiment(text_content):
 
     client = language_v1.LanguageServiceClient()
@@ -146,32 +159,69 @@ def get_sentiments(tweets):
 
     return sentiments, magnitudes
 
+'''
+Plots data gathered from tweets.
+Credit to matplotlib documentation for most of the plotting functionality
+'''
+def plot_data(df):
+    # Convert dates to list in datetime format
+    dates = [date for date in df["date"]]
+
+    # Covnert sentiments to a list from df
+    sentiments = [float(s) for s in df["sentiment"]]
+    levels = np.array(sentiments)
+
+    # Create figure and plot a stem plot with the date
+    fig, ax = plt.subplots(figsize=(8.8, 4), constrained_layout=True)
+    ax.set(title="Sentiment over time")
+
+    ax.vlines(dates, 0, levels, color="tab:red")  # The vertical stems.
+    ax.plot(dates, np.zeros_like(dates), "o-",
+            color="k", markerfacecolor="w")  # Baseline and markers on it.
+
+    names = [str(round(s,2)) for s in sentiments]
+    vert = np.array(['top', 'bottom'])[(levels > 0).astype(int)]
+    for d, l, r, va in zip(dates, levels, names, vert):
+        ax.annotate(r, xy=(d, l), xytext=(-3, np.sign(l)*3),
+                    textcoords="offset points", va=va, ha="right")
+    # format xaxis with 4 month intervals
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
+    plt.setp(ax.get_xticklabels(), rotation=30, ha="right")
+    # remove y axis and spines
+    ax.yaxis.set_visible(True)
+    ax.spines[["left", "top", "right"]].set_visible(False)
+
+    ax.margins(y=0.1)
+    plt.show()
+
+
 def main():
 
-    # Get username from user input
+    # # Get username from user input
 
     username = input("Enter a Twitter username: ")
-    username = "DojaCat"
-    n_retrieval = int(input("Enter number of tweets to analyze: "))
-    if (n_retrieval < 5 or n_retrieval > 100):
-        print("Number invalid, <1 or >100")
-        return
 
     # Retrieve unique user ID for future requests
     userID = get_userID(username)
     
-    tweets_text, tweets_date = get_tweets(userID=userID, n_retrieval=n_retrieval)
-        
+    tweets_text, tweets_date = get_tweets(userID=userID, n_retrieval=100) # Retrieve Tweet data
+    sentiments, magnitudes = get_sentiments(tweets=tweets_text) # Retrieve sentiment data
 
-    # Retrieve sentiment for each one of the tweets using Google NLP
-    sentiments, magnitudes = get_sentiments(tweets=tweets_text)
-
-
-    # Write gathered data (tweets (text contents), tweet created dates, sentiment scores, and sentiment magnitutdes) to dataframe
+    # # Write gathered data to dataframe.
     df = pd.DataFrame({'text': tweets_text, 'date': tweets_date, 'sentiment': sentiments, 'magnitude': magnitudes})
+    
+    
+    # # Save to csv
+    # df.to_csv("./tweets.csv")
+    # header_list = ["text", "date", "sentiment", "magnitude"]
+    # df = pd.read_csv("./tweets.csv", names=header_list)
+    # dates = [datetime.strptime(date, "%Y-%m-%d") for date in df["date"]]
+    
+    plot_data(df)
 
-    # Save to csv
-    df.to_csv("./tweets.csv")
+
+    
     return
 
 
