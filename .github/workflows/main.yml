@@ -33,6 +33,14 @@ jobs:
           envkey_TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
           directory: project3
           file_name: .env
+          
+      - name: Make google credentials
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_google_credentials: ${{ secrets.google_credentials }}
+          directory: project3
+          file_name: google_credentials.json          
+      
       
       - name: setup python
         uses: actions/setup-python@v2
@@ -46,7 +54,6 @@ jobs:
           cd ./project3
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          echo ${{secrets.google_credentials}} > google_credentials.json
 
       # Run Twitter Tests
       - name: Run Twitter Tests
