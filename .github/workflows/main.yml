@@ -29,6 +29,7 @@ jobs:
           envkey_TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
           envkey_TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
           directory: project3
+          python-version: '3.9'
 
       # Install requirements
       - name: Install requirements
