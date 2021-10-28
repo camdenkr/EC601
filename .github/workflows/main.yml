@@ -28,9 +28,9 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
-          envkey_TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
-          envkey_TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
-          envkey_TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          envkey_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          envkey_API_SECRET_KEY: ${{ secrets.TWITTER_API_SECRET }}
+          envkey_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
           directory: project3
           file_name: .env
           
