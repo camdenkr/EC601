@@ -24,7 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - with:
+        with:
           envkey_TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
           envkey_TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
           envkey_TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
