@@ -23,18 +23,29 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: checkout repo
       - uses: actions/checkout@v2
+      
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
         with:
           envkey_TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
           envkey_TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
           envkey_TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
           directory: project3
-          python-version: '3.9'
+          file_name: .env
+      
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.7' # install the python version needed
+          
 
       # Install requirements
       - name: Install requirements
         run: |
           cd ./project3
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
           echo ${{secrets.google_credentials}} > google_credentials.json
 
