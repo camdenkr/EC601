@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
 load_dotenv()
 
+from ..social_media_analyzer import *
+
+
 def test_analyze_sentiment_good():
     assert(round(analyze_sentiment("Very good. I am Very happy.")[0]) == 1 ) # Positive Sentiment
     return

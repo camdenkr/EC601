@@ -1,7 +1,5 @@
 import pytest
 
-# Must set up credentials with the following or using CI
-
 import os
 from dotenv import load_dotenv
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
