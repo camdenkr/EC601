@@ -37,11 +37,11 @@ jobs:
       - name: Make Google Credentials
         uses: SpicyPizza/create-envfile@v1
         with:
-          envkey_project_id: ${{ secrets.TWITTER_API_KEY }}
-          envkey_private_key_id: ${{ secrets.TWITTER_API_SECRET }}
-          envkey_private_key: ${{ secrets.TWITTER_BEARER_TOKEN }}
-          envkey_client_email: ${{ secrets.TWITTER_BEARER_TOKEN }}
-          envkey_client_id: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          envkey_project_id: ${{ secrets.GCP_PROJECTID }}
+          envkey_private_key_id: ${{ secrets.GCP_PRIVATEKEYID }}
+          envkey_private_key: ${{ secrets.GCP_PRIVATE_KEY }}
+          envkey_client_email: ${{ secrets.GCP_EMAIL }}
+          envkey_client_id: ${{ secrets.GCP_CLIENTID }}
           directory: project3
           file_name: google_credentials
       
