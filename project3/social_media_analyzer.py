@@ -15,6 +15,7 @@ import numpy as np
 from datetime import datetime
 
 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
 
 
 
