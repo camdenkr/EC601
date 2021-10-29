@@ -2,7 +2,7 @@ import pytest
 
 import os
 from dotenv import load_dotenv
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials"
 load_dotenv()
 
 from ..social_media_analyzer import *
