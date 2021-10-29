@@ -31,15 +31,9 @@ jobs:
           envkey_API_KEY: ${{ secrets.TWITTER_API_KEY }}
           envkey_API_SECRET_KEY: ${{ secrets.TWITTER_API_SECRET }}
           envkey_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          envkey_GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SECRETS }}
           directory: project3
           file_name: .env
-          
-      - name: Make Google Credentials
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_: ${{ secrets.GCP_SECRETS }}
-          directory: project3
-          file_name: google_credentials.json
       
       
       - name: setup python
