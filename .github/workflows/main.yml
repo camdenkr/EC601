@@ -34,12 +34,16 @@ jobs:
           directory: project3
           file_name: .env
           
-      - name: Make google credentials
+      - name: Make Google Credentials
         uses: SpicyPizza/create-envfile@v1
         with:
-          envkey_google_credentials: ${{ secrets.google_credentials }}
+          envkey_project_id: ${{ secrets.TWITTER_API_KEY }}
+          envkey_private_key_id: ${{ secrets.TWITTER_API_SECRET }}
+          envkey_private_key: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          envkey_client_email: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          envkey_client_id: ${{ secrets.TWITTER_BEARER_TOKEN }}
           directory: project3
-          file_name: google_credentials.json          
+          file_name: google_credentials
       
       
       - name: setup python
@@ -65,4 +69,4 @@ jobs:
       - name: Run Sentiment Tests
         run: |
           cd ./project3
-          pytest test/test_twitter.py
+          pytest test/test_sentiment.py
