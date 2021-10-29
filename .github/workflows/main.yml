@@ -35,6 +35,13 @@ jobs:
           directory: project3
           file_name: .env
       
+      - name: Make google json
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_: ${{ secrets.GCP_SECRETS }}
+          directory: project3
+          file_name: google_credentials.json
+      
       
       - name: setup python
         uses: actions/setup-python@v2
