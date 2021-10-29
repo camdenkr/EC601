@@ -37,13 +37,9 @@ jobs:
       - name: Make Google Credentials
         uses: SpicyPizza/create-envfile@v1
         with:
-          envkey_project_id: ${{ secrets.GCP_PROJECTID }}
-          envkey_private_key_id: ${{ secrets.GCP_PRIVATEKEYID }}
-          envkey_private_key: ${{ secrets.GCP_PRIVATE_KEY }}
-          envkey_client_email: ${{ secrets.GCP_EMAIL }}
-          envkey_client_id: ${{ secrets.GCP_CLIENTID }}
+          envkey_: ${{ secrets.GCP_SECRETS }}
           directory: project3
-          file_name: google_credentials
+          file_name: google_credentials.json
       
       
       - name: setup python
