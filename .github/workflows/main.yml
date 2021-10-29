@@ -53,9 +53,3 @@ jobs:
         run: |
           cd ./project3
           pytest test/test_twitter.py
-      
-      # Run Google Sentiment Tests
-      - name: Run Sentiment Tests
-        run: |
-          cd ./project3
-          pytest test/test_sentiment.py
